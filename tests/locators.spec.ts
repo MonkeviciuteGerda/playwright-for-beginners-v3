@@ -11,7 +11,7 @@ test.describe('locators', async () => {
     await page.getByLabel('Login', { exact: true }).click();
 
     await page.getByLabel('Click to search').click();
-    await page.locator('input[type="text"]').fill('Cattor Juice{enter}');
+    await page.locator('input[type="text"]').fill('Carrot Juice{enter}');
     await page.getByAltText('Carrot Juice (1000ml)').click();
     await page.getByPlaceholder('What did you like or dislike?').fill('I really like this juice');
     await page.getByTestId('submit').click();
