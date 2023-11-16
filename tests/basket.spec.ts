@@ -31,7 +31,7 @@ test.describe('Basket tests', async () => {
     }
   ];
 
-  testCases.forEach(async testCase => {
+  testCases.forEach(testCase => {
     test(`Add ${testCase.product} item to basket`, async ({ page }) => {
       await page.locator('#searchQuery').click();
       await page.locator('input[type="text"]').fill(testCase.product);
