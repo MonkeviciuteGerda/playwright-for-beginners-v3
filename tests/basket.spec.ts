@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { testUser } from "../data/testData";
 
 test.describe('Basket tests', async () => {
   test.beforeEach(async ({ page }) => {
@@ -6,8 +7,8 @@ test.describe('Basket tests', async () => {
     await page.getByTestId('dismiss').click();
     await page.getByLabel('dismiss cookie message').click();
 
-    await page.locator('#email').fill('jane.doe@test.com');
-    await page.locator('#password').fill('jane.doe');
+    await page.locator('#email').fill(testUser.email);
+    await page.locator('#password').fill(testUser.password);
     await page.locator('#loginButton').click();
   });
 
