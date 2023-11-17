@@ -1,5 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import { Form } from './Form';
+import { AddressProps } from '../../types/types';
 
 export class AddressPage {
   private readonly page: Page;
@@ -35,11 +36,11 @@ export class AddressPage {
     await row.getByTestId(this.selectors.editButton).click();
   }
 
-  public async verifyAddressDetails(name: string, address: string, city: string, state: string, zipCode: string, country: string) {
+  public async verifyAddressDetails(address: AddressProps) {
     await expect(this.page.getByTestId(this.selectors.table)).toBeVisible();
-    const row = this.page.getByTestId(this.selectors.tableRow).filter({ hasText: name });
-    await expect(row.getByTestId(this.selectors.nameColumn)).toContainText(name);
-    await expect(row.getByTestId(this.selectors.fullAddressColumn)).toContainText(`${address}, ${city}, ${state}, ${zipCode}`);
-    await expect(row.getByTestId(this.selectors.countryColumn)).toContainText(country);
+    const row = this.page.getByTestId(this.selectors.tableRow).filter({ hasText: address.name });
+    await expect(row.getByTestId(this.selectors.nameColumn)).toContainText(address.name);
+    await expect(row.getByTestId(this.selectors.fullAddressColumn)).toContainText(`${address.address}, ${address.city}, ${address.state}, ${address.zipCode}`);
+    await expect(row.getByTestId(this.selectors.countryColumn)).toContainText(address.country);
   }
 }
