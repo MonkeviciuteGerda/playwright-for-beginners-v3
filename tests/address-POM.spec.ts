@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { testUser } from '../data/testData';
 import { AddressPage } from '../pageObjects/address/AddressPage';
 import { LoginPage } from '../pageObjects/login/LoginPage';
-import { AddressProps } from '../types/types';
+import { DataGenerator } from '../utils/DataGenerator';
 
 let addressPage: AddressPage;
 
@@ -19,15 +19,7 @@ test.describe('Test address', async () => {
   });
 
   test('Create address', async () => {
-    const addressData: AddressProps = {
-      country: 'Country',
-      name: `Name ${Date.now()}`,
-      mobileNumber: '123456789',
-      zipCode: '12345',
-      address: 'Address',
-      city: 'City',
-      state: 'State',
-    }
+    const addressData = DataGenerator.addressData(`Name ${Date.now()}`);
 
     await addressPage.openAddressForm();
     await addressPage.form.fillInForm(addressData);
@@ -37,25 +29,8 @@ test.describe('Test address', async () => {
   });
 
   test('Edit address', async () => {
-    const initialAddressData: AddressProps = {
-      country: 'Country',
-      name: `Name ${Date.now()}`,
-      mobileNumber: '123456789',
-      zipCode: '12345',
-      address: 'Address',
-      city: 'City',
-      state: 'State',
-    }
-
-    const updatedAddressData: AddressProps = {
-      country: 'Country2',
-      name: `Name ${Date.now()} 2`,
-      mobileNumber: '123456782',
-      zipCode: '12342',
-      address: 'Address2',
-      city: 'City2',
-      state: 'State2',
-    }
+    const initialAddressData = DataGenerator.addressData(`Name ${Date.now()}`);
+    const updatedAddressData = DataGenerator.addressData(`Name ${Date.now()} 2`);
 
     await addressPage.openAddressForm();
     await addressPage.form.fillInForm(initialAddressData);
